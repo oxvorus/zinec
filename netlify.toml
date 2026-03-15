@@ -1,0 +1,32 @@
+[build]
+command = "npm run build"
+publish = ".next"
+
+[[redirects]]
+from = "/*"
+to = "/index.html"
+status = 200
+
+[dev]
+port = 3000
+
+[[headers]]
+for = "/*"
+[headers.values]
+X-Content-Type-Options = "nosniff"
+X-Frame-Options = "SAMEORIGIN"
+X-XSS-Protection = "1; mode=block"
+Referrer-Policy = "strict-origin-when-cross-origin"
+
+[[headers]]
+for = "/api/*"
+[headers.values]
+Cache-Control = "public, max-age=0, must-revalidate"
+
+[context.production.environment]
+NEXT_PUBLIC_SUPABASE_URL = ""
+NEXT_PUBLIC_SUPABASE_ANON_KEY = ""
+SUPABASE_SERVICE_KEY = ""
+NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY = ""
+STRIPE_SECRET_KEY = ""
+NEXT_PUBLIC_APP_URL = ""
