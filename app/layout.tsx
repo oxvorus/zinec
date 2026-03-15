@@ -1,6 +1,9 @@
+'use client';
+
 import type { Metadata, Viewport } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css';
+import { useLocationTracking } from '@/hooks/useLocationTracking';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -22,11 +25,16 @@ export const viewport: Viewport = {
   themeColor: '#2563eb',
 };
 
-export default function RootLayout({
+function RootLayoutContent({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  // Initialize location tracking on all pages
+  useLocationTracking({
+    page_visited: 'root',
+  });
+
   return (
     <html lang="id">
       <head>
@@ -41,3 +49,5 @@ export default function RootLayout({
     </html>
   );
 }
+
+export default RootLayoutContent;
